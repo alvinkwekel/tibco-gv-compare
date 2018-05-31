@@ -15,6 +15,7 @@
 				<xsl:value-of select="$compareXml//dd:DeploymentDescriptors/dd:description" />
 			</xsl:attribute>
 			<xsl:apply-templates select="//dd:NameValuePairs"/>
+			<xsl:apply-templates select="$compareXml//dd:NameValuePairs[not(//dd:NameValuePairs[current()/dd:name])]"/>
 		</compare>
 	</xsl:template>
 
@@ -30,7 +31,7 @@
 			<xsl:apply-templates select="./*"/>
 
 			<!-- Go over orphan nv pairs in compare xml -->
-			<xsl:apply-templates select="$compareXml//dd:NameValuePairs[@name=current()/@name]/*[not(dd:name = current()/*/dd:name)]"/>
+			<xsl:apply-templates select="$compareXml//dd:NameValuePairs[dd:name=current()/dd:name]/*[not(dd:name = current()/*/dd:name)]"/>
 		</group>
 	</xsl:template>
 
